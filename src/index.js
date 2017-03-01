@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import SvgEditor from './components/SvgEditor';
 import './index.css';
 
 ReactDOM.render(
-  <App />,
+  <SvgEditor />,
   document.getElementById('root')
 );
