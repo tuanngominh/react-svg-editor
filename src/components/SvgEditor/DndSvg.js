@@ -1,27 +1,19 @@
 import React, {Component} from 'react';
-import enableDnd from './enableDnd'
+import Rect from './Rect'
 
-export class RectWithoutDnD extends Component {
-  render() {
-    return (
-      <rect
-        {...this.props}
-      >
-      </rect>
-    );
-  }
+const typeMapping = {
+  'rect': Rect
 }
-
-const Rect = enableDnd(RectWithoutDnD)
 
 class DndSvg extends Component {
   state = {
     items: [
-    {
-      key: 'key1', width: 30, height: 30
-    },
-    {
-      key: 'key2', width: 40, height: 40
+    {      
+      type: 'rect',
+      'props': {
+        key: 'key1',
+        width: 30, height: 30, stroke: "blue", strokeWidth: "1"
+      }
     }
     ]
   }
@@ -30,7 +22,11 @@ class DndSvg extends Component {
     this.setState(prevState => {
       return {
         items: [...prevState.items, {
-          key: 'key' + Math.random(), width: 40, height: 40
+          type: 'rect',
+          'props': {
+            key: 'key' + Math.random(), width: 40, height: 40,
+            width: 30, height: 30, stroke: "blue", strokeWidth: "1"
+          }
         }]
       }
     })
@@ -47,14 +43,9 @@ class DndSvg extends Component {
         <g>
         {
           this.state.items.map((item) => {
-            return (
-              <Rect
-                key={item.key}
-                width={item.width}
-                height={item.height}
-                stroke="blue" 
-                strokeWidth="1"
-              />
+            return React.createElement(
+              typeMapping[item.type],
+              item.props
             )
           })
         }
