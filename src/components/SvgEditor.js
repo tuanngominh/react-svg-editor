@@ -58,16 +58,33 @@ class SvgEditor extends Component {
     this.addSampleContent()
   }
 
+  handleZoomIn = () => {
+    this.dndSvg.zoom(1.2)
+  }
+
+  handleZoomOut = () => {
+    this.dndSvg.zoom(0.8) 
+  }
+
   render () {
     return (
       <div className="container editor">
         <div className="row">
           <div className="col-sm-12 col-md-3 toolbar">
             <div className="list-group">
+              <a href="#" className="list-group-item list-group-item-action" onClick={this.handleZoomIn}>
+                <i className="fa fa-search-plus" aria-hidden="true"></i>
+              </a>
+              <a href="#" className="list-group-item list-group-item-action" onClick={this.handleZoomOut}>
+                <i className="fa fa-search-minus" aria-hidden="true"></i>
+              </a>
+            </div>
+            <br/>
+            <div className="list-group">
               <a href="#" className="list-group-item list-group-item-action" onClick={this.handleAddImage}><i className="fa fa-picture-o" aria-hidden="true"></i>Add image</a>
               <a href="#" className="list-group-item list-group-item-action" onClick={this.handleAddText}><i className="fa fa fa-font" aria-hidden="true"></i>Add text</a>
               <a href="#" className="list-group-item list-group-item-action" onClick={this.handleAddRect}><i className="fa fa-square-o" aria-hidden="true"></i>Add rect</a>
-            </div>            
+            </div>
           </div>
           <div className="col-sm-12 col-md-9">
             <Svg ref={node => this.dndSvg = node}/>

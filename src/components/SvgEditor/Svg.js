@@ -13,6 +13,7 @@ const typeMapping = {
 
 class Svg extends Component {
   state = {
+    matrix: [1, 0, 0, 1, 0, 0],
     items: []
   }
 
@@ -86,6 +87,17 @@ class Svg extends Component {
     return config
   }
 
+  zoom(scale) {
+    const m = this.state.matrix;
+    const len = m.length;
+    for (let i = 0; i < len; i++) {
+      m[i] *= scale;
+    }
+    m[4] += (1 - scale) * this.props.width / 2;
+    m[5] += (1 - scale) * this.props.height / 2;
+    this.setState({ matrix: m });
+  }
+
   render() {
     const { height, width } = this.props;
     return (
@@ -94,7 +106,7 @@ class Svg extends Component {
         width={width}
       >
         <rect x="0" y="0" height={height} width={width} stroke="grey" strokeWidth="1" fillOpacity={0}></rect>
-        <g>
+        <g transform={`matrix(${this.state.matrix.join(' ')})`}>
         {
           this.state.items.map((item) => {
             return React.createElement(
