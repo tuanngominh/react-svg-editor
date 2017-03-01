@@ -70,6 +70,10 @@ class SvgEditor extends Component {
     return (
       <div className="container editor">
         <div className="row">
+          <div className="col-sm-12 text-center">
+            <h2>Online design tool on react and svg</h2>
+            <br/>
+          </div>
           <div className="col-sm-12 col-md-3 toolbar">
             <div className="list-group">
               <a href="#" className="list-group-item list-group-item-action" onClick={this.handleZoomIn}>
