@@ -8,7 +8,7 @@ class SvgEditor extends Component {
   handleAddRect = () => {
     this.dndSvg.addElement({
       type: 'rect',
-      width: 30, height: 30, stroke: "blue", strokeWidth: "1"
+      width: 100, height: 100, stroke: "blue", strokeWidth: "1"
     })
   }
 
@@ -66,6 +66,10 @@ class SvgEditor extends Component {
     this.dndSvg.zoom(0.8) 
   }
 
+  handleToggleGrid = () => {
+    this.dndSvg.toggleGrid()
+  }
+
   render () {
     return (
       <div className="container editor">
@@ -76,11 +80,14 @@ class SvgEditor extends Component {
           </div>
           <div className="col-sm-12 col-md-3 toolbar">
             <div className="list-group">
-              <a href="#" className="list-group-item list-group-item-action" onClick={this.handleZoomIn}>
-                <i className="fa fa-search-plus" aria-hidden="true"></i>
+              <a href="#" className="list-group-item list-group-item-action" onClick={this.handleZoomIn} title="zoom in">
+                <i className="fa fa-search-plus" aria-hidden="true"></i> Zoom in
               </a>
-              <a href="#" className="list-group-item list-group-item-action" onClick={this.handleZoomOut}>
-                <i className="fa fa-search-minus" aria-hidden="true"></i>
+              <a href="#" className="list-group-item list-group-item-action" onClick={this.handleZoomOut} title="zoom out">
+                <i className="fa fa-search-minus" aria-hidden="true"></i> Zoom out
+              </a>
+              <a href="#" className="list-group-item list-group-item-action" onClick={this.handleToggleGrid} title="toggle grid">
+                <i className="fa fa-th-large" aria-hidden="true"></i> Grid
               </a>
             </div>
             <br/>

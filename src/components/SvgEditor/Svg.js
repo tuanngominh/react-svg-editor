@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import uuid from 'uuid'
 
+import Background from './Background'
+
 import Rect from './Rect'
 import Image from './Image'
 import Text from './Text'
@@ -14,6 +16,7 @@ const typeMapping = {
 class Svg extends Component {
   state = {
     matrix: [1, 0, 0, 1, 0, 0],
+    showGrid: true,
     items: []
   }
 
@@ -98,6 +101,14 @@ class Svg extends Component {
     this.setState({ matrix: m });
   }
 
+  toggleGrid = () => {
+    this.setState(prevState => {
+      return {
+        showGrid: !prevState.showGrid
+      }
+    })
+  }
+
   render() {
     const { height, width } = this.props;
     return (
@@ -105,7 +116,11 @@ class Svg extends Component {
         height={height}
         width={width}
       >
-        <rect x="0" y="0" height={height} width={width} stroke="grey" strokeWidth="1" fillOpacity={0}></rect>
+        <Background 
+          height={height}
+          width={width}
+          showGrid={this.state.showGrid}
+        />
         <g transform={`matrix(${this.state.matrix.join(' ')})`}>
         {
           this.state.items.map((item) => {
@@ -128,8 +143,8 @@ Svg.propTypes = {
 };
 
 Svg.defaultProps = {
-  width: 400,
-  height: 400,
+  width: 401,
+  height: 401,
 };
 
 export default Svg
